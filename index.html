@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head> <!--Created By: Charlotte Kovac aka CelestialCthulhu-->
+    <title>Lemon's Celebratory 500K Bingo</title>
+    <link href="style.css" type="text/css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poetsen+One&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+
+  </head>
+  <body>
+    <div class="intro">
+    <h1>500,000 SUBSCRIBERS BINGO!</h1>
+   <!-- <div class="marquee-w"> Deal with later-->
+    <h2>Welcome to 500K Bingo! Featuring Lemon's Lack of Sanity!</h2>
+        </div>
+    <div class="ruleset">
+    <h3>Rules:</h3>
+      <ol>
+        <li><strong>
+          If Lemon does something that matches a box on the board, mark the board by clicking on the box. If a misclick happens, click the box again to 'unmark'.
+        </li>
+        <li>
+          Once a connecting 5 have been made, take a screenshot of the whole board. Send this screenshot @-ing the mods in Discord. You will also need to type
+          'BINGO!' in chat.
+        </li>
+        <li>
+          Mods will review and comment in chat if the bingo is valid.
+        </li>
+        </strong>
+      </ol>
+    </div>
+    <h4>WARNING: IF YOU RELOAD THE PAGE, YOUR BINGO CARD WILL BE RESET AND A NEW ONE WILL LOAD.</h4>
+    <h4>IF YOU CLOSE THE BINGO PAGE, YOUR CARD WILL BE LOST.</h4>
+    <h4>A NEW CARD <em>MUST</em> BE DRAWN FOR EACH STREAM.</h4>
+    <div>
+      <h3 div class="cards">Bingo Cards Found Here!</h3>
+          <button onclick="generateCard()">Choose Your Card!</button>
+    <br /><br />
+    </div>
+    <div id="colorButtons">
+      <h3 div class="color-choice">Choose Your Color:</h3> <!--POSS USE .QUERYSELECTOR TO MATCH WITH CSS CODE?????? POSS THOUGHT-->
+      <button class="color-button green" onclick="changeColor('green')">Green</button>
+      <button class="color-button purple" onclick="changeColor('purple')">Purple</button>
+      <button class="color-button blue" onclick="changeColor('blue')">Blue</button>
+      <button class="color-button yellow" onclick="changeColor('yellow')">Yellow</button>
+      <button class="color-button orange" onclick="changeColor('orange')">Orange</button>
+      <button class="color-button red" onclick="changeColor('red')">Red</button>
+      <button class="color-button gray" onclick="changeColor('gray')">Gray</button>
+      <button class="color-button pink" onclick="changeColor('pink')">Pink</button>
+      <button class="color-button tan" onclick="changeColor('tan')">Tan</button>
+    </div>
+    <br />
+    <div>
+      <table border="1">
+          <thead>
+            <tr>
+              <th scope="col">L</th>
+              <th scope="col">E</th>
+              <th scope="col">M</th>
+              <th scope="col">O</th>
+              <th scope="col">N</th>
+                  <table id="bingoCard"></table>
+                  <script>
+                    var selectedColor = "";
+      // Array of words to populate the bingo card
+      var words = [
+        "Bonewheels of Death (dies to bonewheels)",
+        "Doll Aquired",
+        "How long have you been there, Oswald? (Meets Oswald)",
+        "Asylum Demon takes No Prisoners (Dies to any AD)",
+        "Wields an Elemental/Blessed Weapon", 
+        "Lemon becomes a Pincushion by Pinwheel (Dies)",
+        "A Side Order of Cheese with the Bed of Chaos (Close and Re-open Game)",
+        "1HP and a Dream! (Wins a Fight he Shouldn't Win)",
+        "Lactose Intolerance Sucks (Cheese the Ceaseless Discharge)",
+        "Firebomb Headmaster Meets Quelana, Mother of Pyromancy",
+        "Find or Destory Eggs",
+        "Gravity - the Ultimate Boss (Dies to Gravity)",
+        "Embrace the Chaos (+3 Challenges Going at Once)",
+        "Save Griggs",
+        "Okay, New Plan!",
+        "Vamos Introductions",
+        "Kill Lautrec",
+        "Anor Londo Archers-FIRE! (Lemon dies to the Archers)",
+        "Laurentius has been Saved",
+        "Praise the Sun! With Sun Bro! (Emote with Solaire)",
+        "Join a Cult, I mean Covenant",
+        "Chaos Take the Wheel! (Obtains Chaos/Occult Weapon)",
+        "What's Vitality? (Glass Cannon Build)",
+        "It burns! (Reach Lost Izalith)",
+        "Your Soul is Mine (Aquire Boss Weapon)",
+        "Kills Andre",
+        "I'll Take That! (Cuts a Tail Off)",
+        "Can I have Your Autograph? (Attacked by +3 Enemies at Once)", 
+        "Tony Swarm!",
+        "Sippy Break",
+        "Ban Hammer! (Lemon Gets Hit with a Hammer)",
+        "Bonk Build",
+        "Parry the World (Lemon Performs 5 Parries)",
+        "Skydiving (Falls off Sen's Fortress)",
+        "Milfeater Mandred Makes an Appearance"
+      ];
+
+      function generateCard() {
+        var card = document.getElementById("bingoCard");
+        card.innerHTML = ""; // Clear previous card
+
+        shuffleArray(words);
+
+        var index = 0;
+        for (var i = 0; i < 5; i++) {
+          var row = card.insertRow();
+          for (var j = 0; j < 5; j++) {
+            var cell = row.insertCell();
+            cell.textContent = words[index++];
+            cell.onclick = markNumber;
+          }
+        }
+      }
+
+      function shuffleArray(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var temp = array[i];
+          array[i] = array[j];
+          array[j] = temp;
+        }
+      }
+
+      function markNumber() {
+        if (!this.classList.contains("marked")) {
+          this.classList.add("marked");
+          if (selectedColor) {
+            this.classList.add(selectedColor);
+          }
+        } else {
+          this.classList.remove("marked");
+          if (selectedColor) {
+            this.classList.remove(selectedColor);
+          }
+        }
+      }
+      
+
+      function changeColor(color) {
+        selectedColor = color;
+        // Update color for already marked cells
+        document.querySelectorAll(".marked").forEach(function(cell) {
+          cell.className = 'marked'; // Reset to base class plus marked
+          if (selectedColor) {
+            cell.classList.add(selectedColor);
+          }
+        });
+      }
+      
+    </script>
+<h4 id="suffering">Please Enjoy Lemon's Suffering!</h4>
+
+    <br />
+
+    </div>
+    <br />
+    <br />
+    <br />
+  </body>
+  <footer>Created By: CelestialCthulhu. Hope you all enjoy ^_^</footer>
+</html>
